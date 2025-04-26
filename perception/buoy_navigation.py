@@ -171,9 +171,9 @@ class CameraDetection(Node):
 def main(args=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("-m", "--model", help="Provide model name or model path for inference",
-                        default=str((Path(__file__).parent / Path('buoy-yolov8-model/best-next_openvino_2022.1_6shave.blob')).resolve().absolute()), type=str)
+                        default=str(Path('/home/roboboat_GNC_2025/YOLOv8_model/best-next_openvino_2022.1_6shave.blob').resolve()), type=str)
     parser.add_argument("-c", "--config", help="Provide config path for inference",
-                        default=str((Path(__file__).parent / Path('buoy-yolov8-model/best-next.json')).resolve().absolute()), type=str)
+                        default=str(Path('/home/roboboat_GNC_2025/YOLOv8_model/best-next.json').resolve()), type=str)
     args = parser.parse_args()
 
     # parse config

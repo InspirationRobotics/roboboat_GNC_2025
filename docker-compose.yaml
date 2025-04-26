@@ -1,0 +1,36 @@
+services:
+  camera_node:
+    image: camera_node_working_code:latest
+    container_name: camera_node
+    privileged: true
+    network_mode: "host"
+    tty: true
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev:/dev
+      - /home/jetson/roboboat_GNC_2025:/home/roboboat_GNC_2025/
+    working_dir: /home/roboboat_GNC_2025/
+    command: ["python3", "perception/buoy_navigation.py"]
+
+  serial_server:
+    image: this_actually_works:latest
+    container_name: serial_server
+    privileged: true
+    network_mode: "host"
+    volumes:
+      - ./navigation:/app/navigation
+    working_dir: /app/navigation
+    command: ["python3", "serial_server.py"]
+
+  navigation_node:
+    image: this_actually_works:latest
+    container_name: navigation_node
+    privileged: true
+    network_mode: "host"
+    volumes:
+      - ./navigation:/app/navigation
+    working_dir: /app/navigation
+    command: ["python3", "auto_nav.py"]
+
